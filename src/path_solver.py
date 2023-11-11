@@ -10,7 +10,7 @@ class LinearPathSolver(Thread):
         self.nodes = None
 
     def run(self) -> None:
-        total_distance, nodes = float('inf'), []
+        total_distance, nodes = 0, []
 
         for edge in self.graph_path:
             total_distance += edge.get('distance')
