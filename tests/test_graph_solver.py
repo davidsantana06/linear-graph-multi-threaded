@@ -1,10 +1,10 @@
 from os import path
 from sys_config import *
-from src.graph_solver import LinearGraphSolver
+from src.graph import LinearGraphSolver
 
 
-GRAPH_FILE = path.join(ROOT_FOLDER, 'output', 'graph.json')
-OUTPUT_FILE = path.join(ROOT_FOLDER, 'output', 'solution.json')
+GRAPH_FILE = path.join(OUTPUT_FOLDER, 'graph.json')
+OUTPUT_FILE = path.join(OUTPUT_FOLDER, 'solution.json')
 
 
 if __name__ == '__main__':

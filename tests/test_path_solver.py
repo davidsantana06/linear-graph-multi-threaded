@@ -1,5 +1,5 @@
 from sys_config import *
-from src.path_solver import LinearPathSolver
+from src.graph import LinearPathSolver
 
 
 GRAPH_PATH = [

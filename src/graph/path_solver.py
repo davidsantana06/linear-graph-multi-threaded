@@ -13,8 +13,8 @@ class LinearPathSolver(Thread):
         total_distance, nodes = 0, []
 
         for edge in self.graph_path:
-            total_distance += edge.get('distance')
-            nodes.append(edge.get('node'))
+            total_distance += edge['distance']
+            nodes.append(edge['node'])
 
         self.total_distance = total_distance
         self.nodes = nodes
