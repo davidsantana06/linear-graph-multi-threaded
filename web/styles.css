@@ -1,0 +1,112 @@
+*, body, html {
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+body, html {
+    background-color: #F6F7FB;
+}
+
+h1 {
+    font-size: 22px;
+    margin-bottom: 26px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding: 50px;
+    
+    >.path-wrapper {
+        background-color: #FFF;
+        width: 100%;
+        padding: 26px;
+        border-radius: 12px;
+
+        >.nodes {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+
+            > span {
+                position: absolute;
+                bottom: 60px;
+                padding-left: 80px;
+                z-index: 100;
+                font-weight: 600;
+            }
+
+            > .node {
+                position: relative;
+                z-index: 2;
+            
+                width: 50px;
+                height: 50px;
+                border: 2px solid #000;
+                background-color: #FFF;
+                border-radius: 50%;
+                padding: 18px;
+            
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            
+                color: #000;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            > .node:nth-child(4) {
+                margin-top: 32px;
+            }
+
+            > .edge {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+
+                height: 100%;
+                width: 2px;
+                background-color: #000;
+                z-index: 1;
+            }
+        }
+
+        >.nodes.best {
+            > span {
+                color: #34a953;
+            }
+
+            > .node {
+                border: 2px solid #34a953;
+                color: #34a953;
+            }
+
+            > .edge {
+                background-color: #34a953;
+            }
+        }
+
+        >.nodes.worst {
+            > span {
+                color: #E94335;
+            }
+            
+            > .node {
+                border: 2px solid #E94335;
+                color: #E94335;
+            }
+
+            > .edge {
+                background-color: #E94335;
+            }
+        }
+    }
+}
+
