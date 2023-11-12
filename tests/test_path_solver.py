@@ -18,11 +18,11 @@ GRAPH_PATH_2 = [
 
 
 if __name__ == '__main__':
-    path_solver_1 = LinearPathSolver(GRAPH_PATH_1)
+    path_solver_1 = LinearPathSolver(1, GRAPH_PATH_1)
     path_solver_1.solve_path()
-    print(path_solver_1.get_total_distance(), path_solver_1.get_nodes())
+    print(path_solver_1.total_distance, path_solver_1.nodes)
 
-    path_solver_2 = LinearPathSolver(GRAPH_PATH_2)
+    path_solver_2 = LinearPathSolver(2, GRAPH_PATH_2)
     path_solver_2.start()
     path_solver_2.join()
-    print(path_solver_2.get_total_distance(), path_solver_2.get_nodes())
+    print(path_solver_2.total_distance, path_solver_2.nodes)
