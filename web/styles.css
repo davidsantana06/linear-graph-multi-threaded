@@ -6,26 +6,66 @@
     border: none;
 }
 
-body, html {
+body {
     background-color: #F6F7FB;
+    padding: 50px;
 }
 
-h1 {
-    font-size: 22px;
-    margin-bottom: 26px;
+
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 75px;
+
+    > h1 {
+        font-size: 26px;
+    }
+
+    > .btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+
+        > button {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: #10244f;
+            color: #FFF;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            > span {
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
 }
 
 .content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 32px;
-    padding: 50px;
     
     >.path-wrapper {
         background-color: #FFF;
         width: 100%;
         padding: 26px;
         border-radius: 12px;
+
+        > h1 {
+            font-size: 18px;
+            margin-bottom: 26px;
+        }
 
         >.nodes {
             position: relative;
@@ -36,7 +76,7 @@ h1 {
 
             > span {
                 position: absolute;
-                bottom: 60px;
+                bottom: 70px;
                 padding-left: 80px;
                 z-index: 100;
                 font-weight: 600;

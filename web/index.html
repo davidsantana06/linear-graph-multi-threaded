@@ -3,16 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grafo Aleatório</title>
+  <title>Grafos Multi-Threaded</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&family=Sofia+Sans:wght@400;500;700;800&display=swap"
     rel="stylesheet">
   <link
     href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp|Material+Symbols+Outlined"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="title">
+    <h1>Grafos Multi-Threaded</h1>
+    <div class="btns">
+      <button onclick="generate()"> 
+        <span class="material-symbols-outlined">conversion_path</span>
+        Gerar caminhos
+      </button>
+      <button onclick="solve()">
+        <span class="material-symbols-outlined">star</span>
+        Melhor caminho
+      </button>
+    </div>
+  </div>
   <div class="content" id="content"></div>
   <script src="./scripts.js"></script>
 </body>

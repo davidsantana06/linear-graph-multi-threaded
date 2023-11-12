@@ -1,30 +1,11 @@
-
-let data;
-
-window.addEventListener('load', () => {
-  fetch("../output/graph.json")
-    .then(response => {
-      if (!response.ok) {
-          throw new Error('Erro ao carregar o arquivo JSON');
-      }
-      return response.json();
-  })
-  .then(responseJSON => {
-      data = responseJSON;
-      generate()
-  })
-  .catch(error => {
-      console.error('Erro:', error);
-  });
-})
-
-function generate() {
-  const graph = data.paths;
+const generate = async () => {
+  const graph = await getPaths();
 
   const content = document.getElementById("content");
+  content.innerHTML = "";
   for (let i = 0; i < graph.length; i++) {
     const path = graph[i];
-    
+
     const nodeWrapper = document.createElement("div");
     nodeWrapper.classList.add("path-wrapper");
 
@@ -52,13 +33,57 @@ function generate() {
 
     const edge = document.createElement("div");
     edge.classList.add("edge");
-    nodes.appendChild(edge)
+    nodes.appendChild(edge);
 
-    nodeWrapper.appendChild(title)
-    nodeWrapper.appendChild(nodes)
+    nodeWrapper.appendChild(title);
+    nodeWrapper.appendChild(nodes);
 
     content.appendChild(nodeWrapper);
-
   }
+}
 
+const solve = async () => {
+  await generate();
+  const solution = await getSolution();
+  setNodeClass(solution.best.id - 1, "best")
+  setNodeClass(solution.worst.id - 1, "worst")
+}
+
+const setNodeClass = (id, classe) => {
+  const content = document.getElementById("content");
+  const path = content.getElementsByClassName('path-wrapper')[id];
+  const nodes = path.querySelector(".nodes");
+  nodes.classList.add(classe)
+}
+
+const getSolution = async () => {
+  return await fetch("../output/solution.json")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Erro ao carregar o arquivo JSON");
+    }
+    return response.json();
+  })
+  .then((response) => {
+    return response;
+  })
+  .catch((error) => {
+    console.error("Erro:", error);
+  });
+}
+
+const getPaths = async () => {
+  return await fetch("../output/graph.json")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Erro ao carregar o arquivo JSON");
+    }
+    return response.json();
+  })
+  .then((response) => {
+    return response.paths;
+  })
+  .catch((error) => {
+    console.error("Erro:", error);
+  });
 }
