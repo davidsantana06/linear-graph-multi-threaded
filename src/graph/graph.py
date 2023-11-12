@@ -60,23 +60,23 @@ class LinearGraph(Graph):
         with open(graph_file, 'r') as g_file:
             graph: Dict[str, object] = json.load(g_file)
 
-        for path in graph.get('paths'):
-            path_solver = LinearPathSolver(path)
+        for i, path in enumerate(graph['paths']):
+            path_solver = LinearPathSolver(id=i+ 1, path=path)
             path_solver.start()
             self._path_solvers.append(path_solver)
     
     def _join_path_solvers(self) -> Tuple[Dict[str, object], ...]:
-        best_path = {'distance': float('inf'), 'nodes': []}
-        worst_path = {'distance': float('-inf'), 'nodes': []}
+        best_path = {'id': -1, 'distance': float('inf'), 'nodes': []}
+        worst_path = {'id': -1, 'distance': float('-inf'), 'nodes': []}
 
         for path_solver in self._path_solvers:
             path_solver.join()
-            total_distance, nodes = path_solver.get_total_distance(), path_solver.get_nodes()
+            id, total_distance, nodes = path_solver.id, path_solver.total_distance, path_solver.nodes
 
             if total_distance < best_path.get('distance'):
-                best_path.update({'distance': total_distance, 'nodes': nodes})
+                best_path.update({'id': id, 'distance': total_distance, 'nodes': nodes})
             elif total_distance > worst_path.get('distance'):
-                worst_path.update({'distance': total_distance, 'nodes': nodes})
+                worst_path.update({'id': id, 'distance': total_distance, 'nodes': nodes})
 
         return (best_path, worst_path)
     

@@ -5,16 +5,23 @@ from typing import Dict, List
 
 
 class PathSolver(ABC, Thread):
-    def __init__(self, graph_path: List[Dict[str, object]]) -> None:
+    def __init__(self, id: int, path: List[Dict[str, object]]) -> None:
         Thread.__init__(self)
-        self._graph_path = graph_path
+        self._id = id
+        self._path = path
         self._total_distance = 0
         self._nodes = []
 
-    def get_total_distance(self) -> float:
+    @property
+    def id(self) -> int:
+        return self._id
+
+    @property
+    def total_distance(self) -> float:
         return self._total_distance
     
-    def get_nodes(self) -> List[object]:
+    @property
+    def nodes(self) -> List[object]:
         return self._nodes
 
     @abstractmethod
@@ -24,7 +31,7 @@ class PathSolver(ABC, Thread):
 
 class LinearPathSolver(PathSolver):
     def solve_path(self) -> None:
-        for edge in self._graph_path:
+        for edge in self._path:
             self._total_distance += edge['distance']
             self._nodes.append(edge['node'])
 
