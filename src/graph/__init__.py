@@ -1,3 +1,2 @@
-from .graph_generator import LinearGraphGenerator
-from .graph_solver import LinearGraphSolver
+from .graph import LinearGraph
 from .path_solver import LinearPathSolver

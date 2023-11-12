@@ -4,7 +4,7 @@ from colorama import (
 )
 from os import path
 
-from graph import LinearGraphGenerator, LinearGraphSolver
+from graph import LinearGraph
 
 
 OUTPUT_FOLDER = path.abspath(
@@ -17,25 +17,8 @@ GRAPH_FILE = path.join(OUTPUT_FOLDER, 'graph.json')
 SOLUTION_FILE = path.join(OUTPUT_FOLDER, 'solution.json')
 
 
-def generate_graph() -> None:
-    graph_generator = LinearGraphGenerator(
-        paths=4,
-        min_edges=5000,
-        max_edges=9999,
-        min_distance=1,
-        max_distance=10
-    )
-    graph_generator.generate_graph(GRAPH_FILE)
-
-
-def solve_graph() -> None:
-    graph_solver = LinearGraphSolver(GRAPH_FILE)
-    graph_solver.solve_graph(SOLUTION_FILE)
-
-
 if __name__ == '__main__':
     init_colorama(autoreset=True)
-
     print(
         '| ----------------------------|\n'
         '| Linear Graph Multi-Threaded |\n'
@@ -43,10 +26,15 @@ if __name__ == '__main__':
         '| --------------------------- |'
     )
 
+    graph = LinearGraph()
+
     input('\nPressione qualquer tecla para gerar o grafo...')
-    generate_graph()
+    graph.generate_graph(
+        paths=5, min_edges=500, max_edges=1000, min_distance=1, max_distance=10, 
+        output_file=GRAPH_FILE
+    )
     print(f'O grafo foi gerado em {Fore.CYAN}"{GRAPH_FILE}"')
 
     input('\nPressione qualquer tecla para resolver o grafo...')
-    solve_graph()
+    graph.solve_graph(GRAPH_FILE, SOLUTION_FILE)
     print(f'A solução foi gerada em {Fore.CYAN}"{SOLUTION_FILE}"')

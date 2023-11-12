@@ -1,1 +1,2 @@
 colorama==0.4.5
+overrides==7.4.0

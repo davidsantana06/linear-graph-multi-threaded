@@ -1,20 +1,33 @@
+from abc import ABC, abstractmethod
+from overrides import override
 from threading import Thread
 from typing import Dict, List
 
 
-class LinearPathSolver(Thread):
+class PathSolver(ABC, Thread):
     def __init__(self, graph_path: List[Dict[str, object]]) -> None:
-        super().__init__()
-        self.graph_path = graph_path
-        self.total_distance = None
-        self.nodes = None
+        Thread.__init__(self)
+        self._graph_path = graph_path
+        self._total_distance = 0
+        self._nodes = []
 
+    def get_total_distance(self) -> float:
+        return self._total_distance
+    
+    def get_nodes(self) -> List[object]:
+        return self._nodes
+
+    @abstractmethod
+    def solve_path(self) -> None:
+        ...
+
+
+class LinearPathSolver(PathSolver):
+    def solve_path(self) -> None:
+        for edge in self._graph_path:
+            self._total_distance += edge['distance']
+            self._nodes.append(edge['node'])
+
+    @override
     def run(self) -> None:
-        total_distance, nodes = 0, []
-
-        for edge in self.graph_path:
-            total_distance += edge['distance']
-            nodes.append(edge['node'])
-
-        self.total_distance = total_distance
-        self.nodes = nodes
+        self.solve_path()
