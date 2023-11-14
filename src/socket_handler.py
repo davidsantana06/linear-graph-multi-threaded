@@ -31,7 +31,7 @@ class SocketHandler:
         start_server = websockets.serve(self.handle_client, self.host, self.port)
 
         self.server = asyncio.get_event_loop().run_until_complete(start_server)
-        print(f"Servidor WebSocket iniciou em ws://{self.host}:{self.port}... 🚀")
+        print(f"🚀  Servidor WebSocket iniciou em ws://{self.host}:{self.port}...")
 
     def get_path_solvers(self):
         return self.path_solvers

@@ -6,12 +6,12 @@ from socket_handler import SocketHandler
 import json
 import nest_asyncio
 
-nest_asyncio.apply()
 OUTPUT_FOLDER = path.abspath(path.join(path.dirname(__file__),'..', 'output'))
 GRAPH_FILE = path.join(OUTPUT_FOLDER, 'graph.json')
 SOLUTION_FILE = path.join(OUTPUT_FOLDER, 'solution.json')
 
 async def main():
+    nest_asyncio.apply()
     init_colorama(autoreset=True)
     print(
         '| ----------------------------|\n'
@@ -31,8 +31,8 @@ async def main():
     graph = linear_graph.get_graph(GRAPH_FILE)
 
     try:
-        for path in enumerate(graph['paths']):
-            await socket_handler.send_message(json.dumps(path))
+        for i, path in enumerate(graph['paths']):
+            await socket_handler.send_message(json.dumps({'id': i, 'path': path}))
             await asyncio.sleep(1)
         linear_graph.get_solution(socket_handler.get_path_solvers(), SOLUTION_FILE)
         print(f'A solução foi gerada em {Fore.CYAN}"{SOLUTION_FILE}"')
