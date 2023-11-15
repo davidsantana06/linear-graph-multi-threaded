@@ -9,8 +9,11 @@ const generate = async () => {
     const nodeWrapper = document.createElement("div");
     nodeWrapper.classList.add("path-wrapper");
 
+    const titles = document.createElement("div")
+    titles.classList.add("titles");
     const title = document.createElement("h1");
     title.innerHTML = `Caminho ${i + 1}`;
+    titles.appendChild(title);
 
     const nodes = document.createElement("div");
     nodes.classList.add("nodes");
@@ -35,7 +38,7 @@ const generate = async () => {
     edge.classList.add("edge");
     nodes.appendChild(edge);
 
-    nodeWrapper.appendChild(title);
+    nodeWrapper.appendChild(titles);
     nodeWrapper.appendChild(nodes);
 
     content.appendChild(nodeWrapper);
@@ -45,14 +48,20 @@ const generate = async () => {
 const solve = async () => {
   await generate();
   const solution = await getSolution();
-  setNodeClass(solution.best.id - 1, "best")
-  setNodeClass(solution.worst.id - 1, "worst")
+  setNodeClass(solution.best, "best")
+  setNodeClass(solution.worst, "worst")
 }
 
-const setNodeClass = (id, classe) => {
+const setNodeClass = (solution, classe) => {
   const content = document.getElementById("content");
-  const path = content.getElementsByClassName('path-wrapper')[id];
+  const path = content.getElementsByClassName('path-wrapper')[solution.id - 1];
   const nodes = path.querySelector(".nodes");
+
+  const titles = path.querySelector(".titles");
+  const title = document.createElement("h2");
+  title.innerHTML = `Distância total: ${solution.distance.toFixed(2)}`;
+  titles.appendChild(title);
+
   nodes.classList.add(classe)
 }
 

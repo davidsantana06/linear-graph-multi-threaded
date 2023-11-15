@@ -30,9 +30,9 @@ body {
         gap: 16px;
 
         > button {
-            padding: 15px 25px;
+            padding: 10px 25px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             background-color: #10244f;
             color: #FFF;
@@ -62,9 +62,20 @@ body {
         padding: 26px;
         border-radius: 12px;
 
-        > h1 {
-            font-size: 18px;
-            margin-bottom: 26px;
+        > .titles {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+
+            > h1 {
+                font-size: 18px;
+            }
+
+            > h2 {
+                font-size: 14px;
+                font-weight: 600;
+            }
         }
 
         >.nodes {
