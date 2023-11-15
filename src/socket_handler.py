@@ -21,7 +21,7 @@ class SocketHandler:
     def path_solvers(self):
         return self.__path_solvers
 
-    async def handle_client(self, websocket: WebSocketServerProtocol):
+    async def handle_client(self, websocket: WebSocketServerProtocol) -> None:
         self.__clients.append(websocket)
 
         try:
@@ -32,17 +32,17 @@ class SocketHandler:
         finally:
             self.__clients.remove(websocket)
 
-    async def send_message(self, message: str):
+    async def send_message(self, message: str) -> None:
         if self.__clients:
             print('\nEnviando caminho para o cliente...')
             await asyncio.gather(*[client.send(message) for client in self.__clients])
 
-    def start_server(self):
+    def start_server(self) -> None:
         start_server = websockets.serve(self.handle_client, self.__host, self.__port)
         self.__server = asyncio.get_event_loop().run_until_complete(start_server)
         print(f'O servidor WebSocket iniciou em {Fore.GREEN}ws://{self.__host}:{self.__port}')
 
-    def stop_server(self):
+    def stop_server(self) -> None:
         if self.__server:
             self.__server.close()
             asyncio.get_event_loop().run_until_complete(self.__server.wait_closed())
